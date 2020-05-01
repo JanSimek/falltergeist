@@ -106,6 +106,11 @@ include(cmake/install/windows.cmake)
 include(cmake/install/linux.cmake)
 include(cmake/install/apple.cmake)
 
+# Copy required data files to the build directory
+add_custom_command(TARGET falltergeist POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/data $<TARGET_FILE_DIR:falltergeist>/data)
+
 # Appveyor
 set(CPACK_GENERATOR "ZIP")
 set(CPACK_PACKAGE_FILE_NAME falltergeist-${falltergeist_VERSION}-${CMAKE_SYSTEM_NAME})
