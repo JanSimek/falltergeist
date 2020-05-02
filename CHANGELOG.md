@@ -6,6 +6,7 @@ Under development
 - [bugfix][#531,#538] Fixed multiple crashes when opening inventory and removing objects from map (JanSimek)
 - [bugfix] Fix crash on Broken Hills map (broken1) when SSL function add_obj_to_inven is called (JanSimek)
 - [bugfix] Fix crash when erasing timer on newr1 map (JanSimek)
+- [bugfix] Fix GLEW initialization on Wayland (ids1024)
 - [feature] Search data files in parent dir too (alexeevdv)
 - [feature] Basic barter system (Zervox, JanSimek)
 - [feature] Fix and update Travis build (JanSimek)
