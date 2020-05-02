@@ -28,6 +28,8 @@ namespace Falltergeist
             int minLevel;
             std::function<bool()> otherRequirements;
             std::string image;
+
+            ~PerkEligibility() {} // bug in an older Clang: https://reviews.llvm.org/D45898
         };
 
         class PlayerEdit final : public State
