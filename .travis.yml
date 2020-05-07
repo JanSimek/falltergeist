@@ -5,13 +5,22 @@ os:
 language: cpp
 sudo: required
 
+compiler:
+  - clang
+  - gcc
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "o/+ejQMKpGBm9h3PxsYLq0AQkYO3ZPk3jy4TvWzRWhu6d0WCBpfeqamwToBZE1ggl7NTsFIWfF9TLh6/rRXEgDw50937z0NNz268w2C/K6n5atyr0bxaLJ+1v2X5QhEJ79nc5hv+hWieCAPmJU8Y2cWmuSlNgoT+krCM/h/3DYA="
+
 script:
   - cmake .
   - make -kj2
 
-compiler:
-  - clang
-  - gcc
+before_install:
+  - if [ "${COVERITY_SCAN_BRANCH}" = "1" ]; then echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca- ; fi
 
 addons:
   apt:
@@ -30,7 +39,19 @@ addons:
       - glew 
       - glm
     update: true
+  coverity_scan:
+    project:
+      name: "JanSimek/falltergeist"
+      description: "Fallout 2 open-source engine"
+    build_command_prepend: "cmake -H. -B_builds"
+    build_command: "cmake --build _builds"
+    branch_pattern: coverity_scan
 
-notifications:
-  webhooks:
-    - https://krake.one/travis-ci/402390990402355201/9O9q4_MrVt5-VI-XGU5GKndoCebPJyVyBaEbLjzDijN-hhcLI9SqyfNLpzLaq3QEESMV
+# Deploy to GitHub pages
+#deploy:
+#  provider: script
+#  script: ./gh-pages-deploy.sh
+#  skip_cleanup: true
+#  on:
+#    branch: master
+#    condition: "$GHPAGES_DEPLOY = yes"
