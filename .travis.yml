@@ -13,7 +13,7 @@ env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
-   - secure: "o/+ejQMKpGBm9h3PxsYLq0AQkYO3ZPk3jy4TvWzRWhu6d0WCBpfeqamwToBZE1ggl7NTsFIWfF9TLh6/rRXEgDw50937z0NNz268w2C/K6n5atyr0bxaLJ+1v2X5QhEJ79nc5hv+hWieCAPmJU8Y2cWmuSlNgoT+krCM/h/3DYA="
+   - secure: "MtVy/218swleJaw4KTB/LpBohQedFFjSvdXW74fXyM0UkDSKKVoU8IROyr5V/wsvAZRqX7NvDimmOSshh6l1U3psOb4J1/etfhrWWbotDkpWTeI/5eYnkXqHevy0hCxjCo9REjckBLFeYVLA/C2fmlv0KqW+zinDujuDetPGTII="
 
 script:
   - cmake .
