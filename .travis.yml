@@ -20,7 +20,7 @@ script:
   - make -kj2
 
 before_install:
-  - if [ "${COVERITY_SCAN_BRANCH}" = "1" ]; then echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca- ; fi
+  - if [ "${TRAVIS_BRANCH}" == "coverity_scan" ]; then echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca- ; fi
 
 addons:
   apt:
