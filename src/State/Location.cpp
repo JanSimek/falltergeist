@@ -521,8 +521,9 @@ namespace Falltergeist
             _ambientSfxTimer.think(deltaTime);
 
             for (auto it = _timerEvents.begin(); it != _timerEvents.end();) {
-                it->timer.think(deltaTime);
-                if (!it->timer.enabled()) {
+                TimerEvent currentEvent = *it;
+                currentEvent.timer.think(deltaTime);
+                if (!currentEvent.timer.enabled()) {
                     it = _timerEvents.erase(it);
                 } else ++it;
             }
@@ -1167,20 +1168,16 @@ namespace Falltergeist
 
         void Location::removeTimerEvent(Game::Object *obj)
         {
-            _timerEvents.erase(std::remove_if(_timerEvents.begin(), _timerEvents.end(),
-                [=](Location::TimerEvent &item) {
-                    return item.object == obj;
-                }
-            ), _timerEvents.end());
+            _timerEvents.remove_if([=](Location::TimerEvent &item) { return item.object == obj; });
         }
 
         void Location::removeTimerEvent(Game::Object *obj, int fixedParam)
         {
-            _timerEvents.erase(std::remove_if(_timerEvents.begin(), _timerEvents.end(),
+            _timerEvents.remove_if(
                 [=](Location::TimerEvent &item) {
                     return item.object == obj && item.fixedParam == fixedParam;
                 }
-            ), _timerEvents.end());
+            );
         }
 
         unsigned int Location::lightLevel()
