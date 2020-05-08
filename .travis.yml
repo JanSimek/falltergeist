@@ -43,6 +43,7 @@ addons:
     project:
       name: "JanSimek/falltergeist"
       description: "Fallout 2 open-source engine"
+    notification_email: jan@simek.xyz
     build_command_prepend: "cmake -H. -B_builds"
     build_command: "cmake --build _builds"
     branch_pattern: coverity_scan
